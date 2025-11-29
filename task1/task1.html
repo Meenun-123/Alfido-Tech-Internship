@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>P. Meenun Reddy — Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+
+</head>
+
+<body>
+
+  <section class="hero">
+    <img src="C:\Users\pmeen\OneDrive\Desktop\alfido\task1\WhatsApp Image 2025-11-09 at 23.11.53_7ed6b22d.jpg" alt="Profile" />
+    <h1>Hi, I'm P. Meenun Reddy</h1>
+    <p>Frontend Developer | CSE 2nd Year | Passionate about UI Design, Animations, JavaScript, Python, and React Development.</p>
+    <p>I love creating modern, animated, responsive websites and solving problems using code.</p>
+  </section>
+
+  <section class="section about reveal">
+    <h2>About Me</h2>
+    <p>
+      I'm a Computer Science Engineering student with a deep interest in frontend development, modern UI/UX, and full-stack learning. I enjoy building visually appealing projects and improving my skills in JavaScript, React, Python, and Java. I am also actively working on GitHub projects and constantly learning new technologies.
+    </p>
+  </section>
+
+  <section class="section skills reveal">
+    <h2>My Skills</h2>
+    <div class="skills-grid">
+      <button class="skill-box">HTML</button>
+      <button class="skill-box">CSS</button>
+      <button class="skill-box">JavaScript</button>
+      <button class="skill-box">React</button>
+      <button class="skill-box">Python</button>
+      <button class="skill-box">Java</button>
+      <button class="skill-box">Git & GitHub</button>
+      <button class="skill-box">Bootstrap</button>
+    </div>
+  </section>
+
+  <section class="section projects reveal" id="projects">
+    <h2>My Projects</h2>
+
+    <div class="projects-grid">
+      <div class="project">
+        <h3>Alfido-Tech-Internship</h3>
+        <p>Frontend Developer Internship tasks & mini-projects.</p>
+        <a href="https://github.com/Meenun-123/Alfido-Tech-Internship" target="_blank">View Repository</a>
+      </div>
+
+      <div class="project">
+        <h3>OIBSIP</h3>
+        <p>Internship tasks (CSS / web projects).</p>
+        <a href="https://github.com/Meenun-123/OIBSIP" target="_blank">View Repository</a>
+      </div>
+
+      <div class="project">
+        <h3>my-web-projects</h3>
+        <p>Collection of small web experiments & apps.</p>
+        <a href="https://github.com/Meenun-123/my-web-projects" target="_blank">View Repository</a>
+      </div>
+
+      <div class="project">
+        <h3>First-HTML-Project</h3>
+        <p>My first HTML learning project.</p>
+        <a href="https://github.com/Meenun-123/First-HTML-Project" target="_blank">View Repository</a>
+      </div>
+
+      <div class="project">
+        <h3>My-HTML-Exercise</h3>
+        <p>HTML, CSS, JS exercises and practice code.</p>
+        <a href="https://github.com/Meenun-123/My-HTML-Exercise" target="_blank">View Repository</a>
+      </div>
+
+      <div class="project">
+        <h3>StopSmart</h3>
+        <p>Arduino-based smart braking system.</p>
+        <a href="https://github.com/Meenun-123/StopSmart" target="_blank">View Repository</a>
+      </div>
+
+      <div class="project">
+        <h3>Personalization-tests</h3>
+        <p>UI experiments & HTML tests.</p>
+        <a href="https://github.com/Meenun-123/Personalization-tests" target="_blank">View Repository</a>
+      </div>
+
+      <div class="project">
+        <h3>JAVA-MINI-PROJECT</h3>
+        <p>Java billing system using OOP.</p>
+        <a href="https://github.com/Meenun-123/JAVA-MINI-PROJECT" target="_blank">View Repository</a>
+      </div>
+
+      <div class="project">
+        <h3>simple-python-online-store</h3>
+        <p>Python GUI / console store project.</p>
+        <a href="https://github.com/Meenun-123/simple-python-online-store" target="_blank">View Repository</a>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="section contact reveal" id="contact">
+    <h2>Contact Me</h2>
+
+    <div class="contact-box">
+      <p>📧 Email:</p>
+      <p><a href="mailto:pmeenunreddy@gmail.com">pmeenunreddy@gmail.com</a></p>
+
+      <p>🔗 LinkedIn:</p>
+      <p><a href="https://www.linkedin.com/in/pasula-meenun-reddy-1b7766391" target="_blank">linkedin.com/in/pasula-meenun-reddy</a></p>
+
+      <p>🌐 GitHub:</p>
+      <p><a href="https://github.com/Meenun-123" target="_blank">github.com/Meenun-123</a></p>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const reveals = document.querySelectorAll('.reveal');
+
+      const revealOnScroll = () => {
+        const trigger = window.innerHeight * 0.85;
+        reveals.forEach(el => {
+          if (el.getBoundingClientRect().top < trigger) {
+            el.classList.add('active');
+          }
+        });
+      };
+
+      window.addEventListener('scroll', revealOnScroll);
+
+      document.querySelectorAll('.project').forEach(card => {
+        card.addEventListener('click', () => {
+          const link = card.querySelector('a');
+          if (link) window.open(link.href, '_blank');
+        });
+      });
+
+      revealOnScroll();
+    });
+  </script>
+
+</body>
+</html>
