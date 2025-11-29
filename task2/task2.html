@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task 2 – Tailwind Responsive Navbar</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-900 text-white">
+
+  <nav class="w-full fixed top-0 left-0 shadow-lg bg-gray-800/90 backdrop-blur-md z-20">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <h1 class="text-2xl font-semibold">Navbar</h1>
+
+      <button id="hamburger" class="flex flex-col gap-1.5 md:hidden">
+        <span class="w-7 h-1 bg-white transition-all"></span>
+        <span class="w-7 h-1 bg-white transition-all"></span>
+        <span class="w-7 h-1 bg-white transition-all"></span>
+      </button>
+
+      <ul id="nav-links" class="hidden md:flex gap-8 text-lg">
+        <li><a href="#" class="hover:text-indigo-400 transition-all duration-300 hover:scale-105">Home</a></li>
+        <li><a href="#" class="hover:text-indigo-400 transition-all duration-300 hover:scale-105">About</a></li>
+        <li><a href="#" class="hover:text-indigo-400 transition-all duration-300 hover:scale-105">Skills</a></li>
+        <li><a href="#" class="hover:text-indigo-400 transition-all duration-300 hover:scale-105">Projects</a></li>
+        <li><a href="#" class="hover:text-indigo-400 transition-all duration-300 hover:scale-105">Contact</a></li>
+      </ul>
+    </div>
+
+    <ul id="mobile-menu" class="hidden flex-col bg-gray-800 md:hidden text-center py-4 space-y-4 text-lg">
+      <li><a href="#" class="hover:text-indigo-400 transition-all duration-300 hover:scale-105">Home</a></li>
+      <li><a href="#" class="hover:text-indigo-400 transition-all duration-300 hover:scale-105">About</a></li>
+      <li><a href="#" class="hover:text-indigo-400 transition-all duration-300 hover:scale-105">Skills</a></li>
+      <li><a href="#" class="hover:text-indigo-400 transition-all duration-300 hover:scale-105">Projects</a></li>
+      <li><a href="#" class="hover:text-indigo-400 transition-all duration-300 hover:scale-105">Contact</a></li>
+    </ul>
+  </nav>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
