@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advanced To-Do Dashboard</title>
+
+<style>
+    body {
+        font-family: Poppins, sans-serif;
+        background: #eef1f7;
+        padding: 20px;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: auto;
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 28px;
+        font-weight: 600;
+    }
+
+    .stats {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        gap: 10px;
+    }
+
+    .stat-box {
+        flex: 1;
+        background: #f8f8f8;
+        padding: 15px;
+        border-radius: 8px;
+        text-align: center;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .input-area {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 25px;
+    }
+
+    .input-area input, .input-area button {
+        padding: 10px;
+        font-size: 15px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+    }
+
+    .input-area button {
+        background: #6a11cb;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    .input-area button:hover {
+        background: #2575fc;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
+
+    table th, table td {
+        padding: 12px;
+        border-bottom: 1px solid #ddd;
+        text-align: left;
+    }
+
+    table th {
+        background: #6a11cb;
+        color: white;
+        font-size: 16px;
+    }
+
+    .btn-complete {
+        background: #22c55e;
+        color: white;
+        padding: 6px 12px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    .btn-delete {
+        background: #ef4444;
+        color: white;
+        padding: 6px 12px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    .notify {
+        position: fixed;
+        top: 20px;
+        right: -300px;
+        background: #22c55e;
+        color: white;
+        padding: 15px 25px;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: 0.5s;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .notify.show {
+        right: 20px;
+    }
+</style>
+</head>
+<body>
+
+<div class="notify" id="notifyBox">Task Added Successfully ✔</div>
+
+<div class="container">
+    <h2>📊 Advanced To-Do List Dashboard</h2>
+
+    <div class="stats">
+        <div class="stat-box">Total Tasks: <span id="totalTasks">0</span></div>
+        <div class="stat-box">Pending: <span id="pending">0</span></div>
+        <div class="stat-box">Completed: <span id="completed">0</span></div>
+        <div class="stat-box">On Time: <span id="onTime">0</span></div>
+        <div class="stat-box">Delayed: <span id="delayed">0</span></div>
+    </div>
+
+    <div class="input-area">
+        <input type="text" id="taskInput" placeholder="Enter task">
+        <input type="datetime-local" id="deadline">
+        <button onclick="addTask()">Add</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Task</th>
+                <th>Deadline</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="taskTable"></tbody>
+    </table>
+
+</div>
+
+<script>
+
+let tasks = [
+
+    // ---------------- SAMPLE TASKS ----------------
+    {
+        name: "Finish HTML assignment",
+        deadline: "2025-01-02T14:00",
+        completed: true,
+        onTime: false  // deadline passed → delayed
+    },
+    {
+        name: "Prepare Navbar Project",
+        deadline: "2025-12-10T18:00",
+        completed: false,
+        onTime: false
+    },
+    {
+        name: "Submit Task 3 (JS Event)",
+        deadline: "2025-11-29T10:00",
+        completed: true,
+        onTime: true
+    },
+    {
+        name: "Design Portfolio Homepage",
+        deadline: "2025-11-20T17:00",
+        completed: true,
+        onTime: false
+    }
+];
+
+function showNotification() {
+    let box = document.getElementById("notifyBox");
+    box.classList.add("show");
+    setTimeout(() => box.classList.remove("show"), 2000);
+}
+
+function updateStats() {
+    let total = tasks.length;
+    let pending = tasks.filter(t => !t.completed).length;
+    let completed = tasks.filter(t => t.completed).length;
+    let onTime = tasks.filter(t => t.completed && t.onTime).length;
+    let delayed = tasks.filter(t => t.completed && !t.onTime).length;
+
+    document.getElementById("totalTasks").innerText = total;
+    document.getElementById("pending").innerText = pending;
+    document.getElementById("completed").innerText = completed;
+    document.getElementById("onTime").innerText = onTime;
+    document.getElementById("delayed").innerText = delayed;
+}
+
+function addTask() {
+    let taskName = document.getElementById("taskInput").value.trim();
+    let deadline = document.getElementById("deadline").value;
+
+    if (taskName === "" || deadline === "") {
+        alert("Please enter task name and deadline");
+        return;
+    }
+
+    let task = {
+        name: taskName,
+        deadline: deadline,
+        completed: false,
+        onTime: false
+    };
+
+    tasks.push(task);
+    displayTasks();
+    updateStats();
+    showNotification();
+
+    document.getElementById("taskInput").value = "";
+    document.getElementById("deadline").value = "";
+}
+
+function completeTask(index) {
+    let task = tasks[index];
+    let now = new Date();
+    let due = new Date(task.deadline);
+
+    task.completed = true;
+    task.onTime = now <= due;
+
+    displayTasks();
+    updateStats();
+}
+
+function deleteTask(index) {
+    tasks.splice(index, 1);
+    displayTasks();
+    updateStats();
+}
+
+function displayTasks() {
+    let table = document.getElementById("taskTable");
+    table.innerHTML = "";
+
+    tasks.forEach((task, i) => {
+        let row = `
+        <tr>
+            <td>${task.name}</td>
+            <td>${task.deadline.replace("T", " ")}</td>
+            <td>${task.completed ? (task.onTime ? "✔ On Time" : "⏳ Delayed") : "Pending"}</td>
+            <td>
+                ${task.completed ? "" : `<button class="btn-complete" onclick="completeTask(${i})">Complete</button>`}
+                <button class="btn-delete" onclick="deleteTask(${i})">Delete</button>
+            </td>
+        </tr>
+        `;
+        table.innerHTML += row;
+    });
+}
+
+window.onload = () => {
+    displayTasks();
+    updateStats();
+};
+
+</script>
+
+</body>
+</html>
